@@ -285,31 +285,30 @@
     <div class="container">
         <form action="process_form.php" method="post">
             <!-- Form 1: Gender -->
-            <div class="form-first">
+                    <div class="form-first">
                 <div class="details personal">
-                    <span class="title">Survey App</span>
-
+                    <span class="project-title">Survey for TUTEM project</span>
                     <div class="fields">
                         <div class="input-field">
-                            <label>Enumerator's Name</label>
+                            <span class="gender-title _Ename">Enumerator's Name<span class="required">*</span></span>
                             <input type="text" name="ename" placeholder="Enter your Enumerator's Name" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Route</label>
+                            <span class="gender-title _Route">Route</span>
                             <input type="text" name="route" placeholder="Enter your route" required>
                         </div>
                     </div>
-                    <span class="gender-title">Section A: Socio-demographics</span>
+                    <span class="section-title">Section A: Socio-demographics</span>
                     <div class="content">
-                        <span class="gender-title">Gender</span>
+                        <span class="gender-title GenderColor">Gender<span class="required">*</span></span>
                         <div class="gender-category">
                             <input type="radio" name="gender" value="Male" required>
                             <label for="gender">Male</label>
                             <input type="radio" name="gender" value="Female" required>
                             <label for="gender">Female</label>
                         </div>
-                        <span class="gender-title">Age(years)</span>
+                        <span class="gender-title _Age">Age(years)<span class="required">*</span></span>
                         <div class="gender-category">
                             <input type="radio" name="age" value="15-24" required>
                             <label for="gender">15-24</label>
@@ -322,7 +321,7 @@
                             <input type="radio" name="age" value="65+" required>
                             <label for="gender">65+</label>
                         </div>
-                        <span class="gender-title">Annual Income</span>
+                        <span class="gender-title _Income">Annual Income<span class="required">*</span></span>
                         <div class="gender-category">
                             <input type="radio" name="income" value="0-2.5lakhs" required>
                             <label for="income">0-2.5lakhs</label>
@@ -333,7 +332,7 @@
                             <input type="radio" name="income" value="above 10lakhs" required>
                             <label for="income">above 10lakhs</label>
                         </div>
-                        <span class="gender-title">Employment</span>
+                        <span class="gender-title _Employment">Employment<span class="required">*</span></span>
                         <div class="gender-category">
                             <input type="radio" name="employment" value="Self-employed" required>
                             <label for="employment">Self-employed</label>
@@ -347,7 +346,7 @@
                             <label for="employment">Other</label>
 
                         </div>
-                        <span class="gender-title">Education</span>
+                        <span class="gender-title _Education">Education<span class="required">*</span></span>
                         <div class="gender-category">
                             <input type="radio" name="education" value="Grade 10 or below" required>
                             <label for="Education">Grade 10 or below</label>
@@ -366,28 +365,28 @@
                     <div class="fields">
                         <span class="gender-title">Location</span>
                         <div class="input-field">
-                            <label>Origin Area</label>
+                            <span class="gender-title _origin-area">Origin Area<span class="required">*</span></span>
                             <input type="text" placeholder="Enter the home area" name="origin_area" required value="">
                         </div>
 
                         <div class="input-field">
-                            <label for="">Origin Pincode</label>
-                            <input type="number" placeholder="Enter the home Pincode" name="origin_pin" required
-                                value="">
+                            <span class="gender-title _origin-pin">Origin Pincode</span>
+                            <input type="number" id="originPin" placeholder="Enter the home Pincode" name="origin_pin"
+                                required value="">
                         </div>
 
                         <div class="input-field">
-                            <label for="">Destination Area</label>
+                            <span class="gender-title _Destination-area">Destination Area<span class="required">*</span></span>
                             <input type="text" placeholder="Enter the area" name="destination_area" required value="">
                         </div>
 
                         <div class="input-field">
-                            <label for="">Destination Pincode</label>
-                            <input type="number" placeholder="Enter the Pincode" name="destination_pin" required
-                                value="">
+                            <span class="gender-title _Destination-pin">Destination Pincode</span>
+                            <input type="number" id="destinationPin" placeholder="Enter the Pincode"
+                                name="destination_pin" required value="">
                         </div>
                     </div>
-                    <span class="gender-title">Resident of city</span>
+                    <span class="gender-title _City">Resident of city<span class="required">*</span></span>
                     <div class="gender-category">
                         <input type="radio" name="city" value="Yes" required>
                         <label for="">Yes</label>
@@ -395,7 +394,10 @@
                         <label for="">No</label>
                     </div>
                 </div>
-                <button type="button" id="next1">Next</button>
+                <div class="buttons">
+                    <button type="button" id="entryBack">Back</button>
+                    <button type="button" id="next1">Next</button>
+                </div>
             </div>
 
             <!-- Form 2: User Information -->
@@ -2135,28 +2137,53 @@
 
     <script>
         // JavaScript to handle form navigation
-        document.getElementById('next1').addEventListener('click', function () {
+   document.getElementById('next1').addEventListener('click', function () {
+            // Reset the color for all fields before performing validation
+            resetFieldColors();
 
             const genderSelected = document.querySelector('input[name="gender"]:checked');
-            const enameSelected = document.querySelector('input[name="ename"]').value.trim();
-            const routeSelected = document.querySelector('input[name="route"]').value.trim();
+            const enameField = document.querySelector('input[name="ename"]');
+            const routeField = document.querySelector('input[name="route"]');
             const incomeSelected = document.querySelector('input[name="income"]:checked');
             const ageSelected = document.querySelector('input[name="age"]:checked');
             const employmentSelected = document.querySelector('input[name="employment"]:checked');
             const educationSelected = document.querySelector('input[name="education"]:checked');
-            const originareaSelected = document.querySelector('input[name="origin_area"]').value.trim();
-            const originpinSelected = document.querySelector('input[name="origin_pin"]').value.trim();
-            const destinationareaSelected = document.querySelector('input[name="destination_area"]').value.trim();
-            const destinationpinSelected = document.querySelector('input[name="destination_pin"]').value.trim();
+            const originareaField = document.querySelector('input[name="origin_area"]');
+            const originpinField = document.querySelector('input[name="origin_pin"]');
+            const destinationareaField = document.querySelector('input[name="destination_area"]');
+            const destinationpinField = document.querySelector('input[name="destination_pin"]');
             const cityselected = document.querySelector('input[name="city"]:checked');
 
-            if (genderSelected && enameSelected && routeSelected && incomeSelected && ageSelected && employmentSelected && educationSelected && originareaSelected && originpinSelected && destinationareaSelected && destinationpinSelected && cityselected) {
+            if (!genderSelected) {
+                alertAndColor('Please select a gender.', 'GenderColor');
+            } else if (!enameField.value.trim()) {
+                alertAndColor('Please enter Enumerator\'s Name.', '_Ename');
+            } else if (!routeField.value.trim()) {
+                alertAndColor('Please enter a route.', '_Route');
+            } else if (!incomeSelected) {
+                alertAndColor('Please select an income.', '_Income');
+            } else if (!ageSelected) {
+                alertAndColor('Please select an age.', '_Age');
+            } else if (!employmentSelected) {
+                alertAndColor('Please select an employment.', '_Employment');
+            } else if (!educationSelected) {
+                alertAndColor('Please select an education.', '_Education');
+            } else if (!originareaField.value.trim()) {
+                alertAndColor('Please enter the origin area.', '_origin-area');
+            } else if (!originpinField.value.trim()) {
+                alertAndColor('Please enter the origin pin.', '_origin-pin');
+            } else if (!destinationareaField.value.trim()) {
+                alertAndColor('Please enter the destination area.', '_Destination-area');
+            } else if (!destinationpinField.value.trim()) {
+                alertAndColor('Please enter the destination pin.', '_Destination-pin');
+            } else if (!cityselected) {
+                alertAndColor('Please select a city.', '_City');
+            } else {
+                // If all fields are valid, you can proceed with your logic here
+                // For example, you can hide the current form and display the next one
                 document.querySelector('.form-first').style.display = 'none';
                 document.querySelector('.form-second').style.display = 'block';
-            } else {
-                alert('Please fill out all the fields before proceeding.');
             }
-
         });
 
         document.getElementById('back1').addEventListener('click', function () {
