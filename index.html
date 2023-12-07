@@ -1,100 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
+    <title>Your Stylish Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #3494e6, #ec6ead);
-            /* Gradient background */
-            color: #fff;
-            /* Text color */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            overflow: hidden;
+        }
+
+        #backgroundVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
 
         .container {
-            padding: 5px;
-            margin: 20px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
-            /* Slightly transparent white background */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
         }
 
         h1 {
-            color: #333;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            color: #ffeb3b;
         }
 
-        .user-button {
-            background-color: #9a2c35;
-            /* Unique button background color */
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
             cursor: pointer;
+            background-color: #61dafb;
+            color: #282c35;
+            border: none;
+            border-radius: 5px;
             transition: background-color 0.3s;
         }
 
-        .user-button:hover {
-            background-color: #d04141;
-            /* Button background color on hover */
-        }
-
-        #adminButton {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-        }
-
-
-        .admin-button:hover {
-            background-color: #3853ab;
-            /* Button background color on hover */
-        }
-
-
-        button+button {
-            margin-left: 10px;
+        button:hover {
+            background-color: #4fa3d1;
         }
     </style>
 </head>
-
 <body>
+
+    <video autoplay muted loop id="backgroundVideo">
+        <!-- Replace 'your-video.mp4' with the actual filename of your video -->
+        <source src="location.mp4" type="video/mp4">
+        
+    </video>
+
     <div class="container">
-        <h1>Survey webapp for TUTEM</h1>
-        <button class="user-button" id="userButton">Start Survey</button>
-
+        <h1>Your <span style="color: #03a9f4;">Location Tracking </span> App</h1>
+        <button id="downloadButton">Download APK</button>
     </div>
-    <label id="adminButton">Admin Login</label>
+
     <script>
-        const userButton = document.getElementById("userButton");
-        const adminButton = document.getElementById("adminButton");
+        document.getElementById('downloadButton').addEventListener('click', function () {
+            // Replace 'your-app.apk' with the actual filename of your APK file
+            var apkFile = 'app-release.apk';
 
-        userButton.addEventListener("click", function () {
-            window.location.href = "entry.html";
+            // Create a link element
+            var link = document.createElement('a');
+            link.href = apkFile;
+            link.download = apkFile;
+
+            // Append the link to the body
+            document.body.appendChild(link);
+
+            // Trigger the click event
+            link.click();
+
+            // Remove the link from the body
+            document.body.removeChild(link);
         });
-
-        adminButton.addEventListener("click", function () {
-            window.location.href = "admin.html";
-        });
-
-        window.oncontextmenu = function () {
-            return false; // Disable right-click context menu
-        };
-
     </script>
-</body>
 
+</body>
 </html>
